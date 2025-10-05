@@ -547,7 +547,7 @@ const EnhancedDashboard: React.FC = () => {
                         </div>
                       </div>
                       <div className="mt-2 text-xs text-gray-600">
-                        Safe level: < 10 mg/m³
+                        Safe level: &lt; 10 mg/m³
                       </div>
                     </div>
 
