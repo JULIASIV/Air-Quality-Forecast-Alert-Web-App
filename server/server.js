@@ -13,6 +13,9 @@ const airQualityRoutes = require('./routes/airQuality');
 const weatherRoutes = require('./routes/weather');
 const alertRoutes = require('./routes/alerts');
 const userRoutes = require('./routes/users');
+const comparisonRoutes = require('./routes/comparison');
+const recommendationRoutes = require('./routes/recommendations');
+const photoJournalRoutes = require('./routes/photoJournal');
 
 // Import services
 const DataCollectorService = require('./services/DataCollectorService');
@@ -77,6 +80,9 @@ app.use('/api/air-quality', airQualityRoutes);
 app.use('/api/weather', weatherRoutes);
 app.use('/api/alerts', alertRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/comparison', comparisonRoutes);
+app.use('/api/recommendations', recommendationRoutes);
+app.use('/api/photo-journal', photoJournalRoutes);
 
 // NASA TEMPO data endpoint
 app.get('/api/nasa/tempo/:parameter', async (req, res) => {

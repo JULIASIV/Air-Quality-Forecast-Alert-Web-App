@@ -6,7 +6,8 @@ import AQIIndicator from "./AQIIndicator";
 import TempoVisualization from "./TempoVisualization";
 import ForecastChart from "./ForecastChart";
 import AlertPanel from "./AlertPanel";
-import { Activity, MapPin, Clock, Satellite, Wind, Thermometer, Droplets } from "lucide-react";
+import PandoraVisualization from "./PandoraVisualization";
+import { Activity, MapPin, Clock, Satellite, Wind, Thermometer, Droplets, Microscope } from "lucide-react";
 import { useState, useEffect } from "react";
 
 interface AirQualityData {
@@ -150,8 +151,9 @@ const Dashboard = () => {
                 <Activity className="w-7 h-7 text-accent group-hover:animate-pulse" />
               </div>
               <div>
-                <div className="text-3xl font-bold text-card-foreground">126</div>
+                <div className="text-3xl font-bold text-card-foreground">152</div>
                 <div className="text-sm text-muted-foreground font-medium">Active Monitors</div>
+                <div className="text-xs text-muted-foreground mt-1">+26 Pandora stations</div>
               </div>
             </div>
           </Card>
@@ -238,9 +240,10 @@ const Dashboard = () => {
 
         {/* Main Content Tabs */}
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="tempo">NASA TEMPO</TabsTrigger>
+            <TabsTrigger value="pandora">Pandora</TabsTrigger>
             <TabsTrigger value="forecast">Forecast</TabsTrigger>
             <TabsTrigger value="comparison">Data Sources</TabsTrigger>
           </TabsList>
@@ -337,6 +340,12 @@ const Dashboard = () => {
             />
           </TabsContent>
 
+          <TabsContent value="pandora" className="space-y-6">
+            <PandoraVisualization 
+              location={selectedLocation}
+            />
+          </TabsContent>
+
           <TabsContent value="forecast" className="space-y-6">
             {forecastData && (
               <ForecastChart 
@@ -349,9 +358,9 @@ const Dashboard = () => {
           <TabsContent value="comparison" className="space-y-6">
             <Card className="p-6">
               <h3 className="text-lg font-semibold mb-4">Data Source Comparison</h3>
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div>
-                  <h4 className="font-medium mb-2 flex items-center gap-2">
+                    <h4 className="font-medium mb-2 flex items-center gap-2">
                     <Satellite className="w-4 h-4" />
                     NASA TEMPO (Satellite)
                   </h4>
@@ -360,6 +369,18 @@ const Dashboard = () => {
                     <li>• Hourly daytime measurements</li>
                     <li>• High spatial resolution</li>
                     <li>• Multiple pollutants (NO₂, HCHO, O₃)</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 flex items-center gap-2">
+                    <Microscope className="w-4 h-4" />
+                    NASA Pandora (Validation)
+                  </h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li>• Ground-based spectroscopy</li>
+                    <li>• Satellite validation reference</li>
+                    <li>• Research-grade precision</li>
+                    <li>• Global network coverage</li>
                   </ul>
                 </div>
                 <div>

@@ -37,6 +37,11 @@ import ForecastView from './ForecastView';
 import HistoricalView from './HistoricalView';
 import SettingsModal from './SettingsModal';
 import ComparisonView from './ComparisonView';
+import AirQualityHeatmap from './AirQualityHeatmap';
+import NotificationSystem, { useNotifications } from './NotificationSystem';
+import HealthImpactCalculator from './HealthImpactCalculator';
+import SocialMediaShare from './SocialMediaShare';
+import AirQualityPredictionEngine from './AirQualityPredictionEngine';
 
 interface AirQualityData {
   location: string;
@@ -76,6 +81,19 @@ const EnhancedDashboard: React.FC = () => {
   const [favorites, setFavorites] = useState<string[]>(['New-York', 'London']);
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedPollutant, setSelectedPollutant] = useState<string>('all');
+  const [showSocialShare, setShowSocialShare] = useState(false);
+  const [showHealthCalculator, setShowHealthCalculator] = useState(false);
+  const [showPredictionEngine, setShowPredictionEngine] = useState(false);
+  const [showHeatmap, setShowHeatmap] = useState(false);
+  
+  // Initialize notifications system
+  const {
+    notifications: systemNotifications,
+    removeNotification,
+    clearAll: clearAllNotifications,
+    notifyAQIAlert,
+    notifyDataUpdate
+  } = useNotifications();
 
   const fetchAirQualityData = async (location: string) => {
     try {
@@ -644,6 +662,20 @@ const EnhancedDashboard: React.FC = () => {
         {viewMode === 'historical' && <HistoricalView location={currentLocation} />}
         {viewMode === 'comparison' && <ComparisonView />}
 
+        {/* New Feature Sections - Show when expanded or current view */}
+        {(isExpanded || viewMode === 'current') && (
+          <>
+            {/* Air Quality Heatmap */}
+            <AirQualityHeatmap />
+            
+            {/* AI Prediction Engine */}
+            <AirQualityPredictionEngine />
+            
+            {/* Health Impact Calculator */}
+            <HealthImpactCalculator />
+          </>
+        )}
+
         {/* Enhanced Footer with More Features */}
         <div className="bg-white rounded-xl shadow-lg p-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -701,6 +733,31 @@ const EnhancedDashboard: React.FC = () => {
           setNotifications={setNotifications}
         />
       )}
+      
+      {/* Social Media Share Modal */}
+      {showSocialShare && airQualityData && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <SocialMediaShare 
+              airQualityData={{
+                location: airQualityData.location,
+                aqi: airQualityData.aqi,
+                category: getAQICategory(airQualityData.aqi),
+                timestamp: airQualityData.timestamp,
+                pollutants: airQualityData.pollutants
+              }}
+              onClose={() => setShowSocialShare(false)}
+            />
+          </div>
+        </div>
+      )}
+      
+      {/* Notification System */}
+      <NotificationSystem 
+        notifications={systemNotifications}
+        onRemoveNotification={removeNotification}
+        onClearAll={clearAllNotifications}
+      />
     </div>
   );
 };
