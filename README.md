@@ -62,7 +62,7 @@ NASA's Tropospheric Emissions: Monitoring of Pollution (TEMPO) mission revolutio
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/air-quality-forecast-app.git
+git clone https://github.com/JULIASIV/Air-Quality-Forecast-Alert-Web-App.git
 cd air-quality-forecast-app
 ```
 
