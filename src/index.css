@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 220 25% 98%;
+    --foreground: 220 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 15%;
+
+    --primary: 240 65% 15%;
+    --primary-foreground: 210 100% 98%;
+
+    --secondary: 220 20% 92%;
+    --secondary-foreground: 220 15% 15%;
+
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 200 85% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 240 65% 15%;
+
+    --radius: 0.75rem;
+
+    /* AQI Color Scale */
+    --aqi-good: 120 70% 50%;
+    --aqi-moderate: 50 100% 50%;
+    --aqi-sensitive: 30 100% 50%;
+    --aqi-unhealthy: 10 100% 50%;
+    --aqi-very-unhealthy: 340 80% 50%;
+    --aqi-hazardous: 280 60% 40%;
+
+    /* Space Theme Gradients */
+    --gradient-space: linear-gradient(135deg, hsl(240 65% 15%) 0%, hsl(260 55% 25%) 50%, hsl(280 45% 35%) 100%);
+    --gradient-atmosphere: linear-gradient(180deg, hsl(200 85% 55% / 0.1) 0%, hsl(240 65% 15% / 0.05) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(240 65% 12%) 0%, hsl(260 55% 20%) 100%);
+    
+    /* Glow Effects */
+    --glow-primary: 0 8px 32px hsl(200 85% 55% / 0.3);
+    --glow-accent: 0 8px 24px hsl(200 85% 55% / 0.4);
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 240 65% 8%;
+    --foreground: 210 100% 98%;
+
+    --card: 240 60% 12%;
+    --card-foreground: 210 100% 98%;
+
+    --popover: 240 60% 12%;
+    --popover-foreground: 210 100% 98%;
+
+    --primary: 200 85% 55%;
+    --primary-foreground: 240 65% 10%;
+
+    --secondary: 240 50% 18%;
+    --secondary-foreground: 210 100% 98%;
+
+    --muted: 240 50% 15%;
+    --muted-foreground: 220 15% 65%;
+
+    --accent: 200 85% 55%;
+    --accent-foreground: 240 65% 10%;
+
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 40% 20%;
+    --input: 240 40% 20%;
+    --ring: 200 85% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .gradient-space {
+    background: var(--gradient-space);
+  }
+
+  .gradient-atmosphere {
+    background: var(--gradient-atmosphere);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(5deg);
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+}
