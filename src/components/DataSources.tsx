@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Satellite, Database, CloudRain, Network, Check } from "lucide-react";
+import { Satellite, Database, CloudRain, Network, Check, Microscope } from "lucide-react";
 
 const dataSources = [
   {
@@ -39,14 +39,27 @@ const dataSources = [
     color: "text-accent"
   },
   {
+    name: "NASA Pandora Global Network",
+    icon: Microscope,
+    description: "Ground-based spectroscopic measurements providing reference data for satellite validation and air quality research across the globe.",
+    features: [
+      "Direct Sun and Sky spectroscopy",
+      "NO₂, O₃, HCHO, SO₂ column measurements",
+      "Real-time satellite validation",
+      "Global network of 100+ stations",
+      "Research-grade precision (<5% uncertainty)"
+    ],
+    color: "text-primary"
+  },
+  {
     name: "Validation Networks",
     icon: Network,
-    description: "Pandora and TolNet ground-based spectrometers for satellite data validation and calibration.",
+    description: "TolNet and other ground-based spectrometers for additional satellite data validation and calibration.",
     features: [
-      "Column NO₂ and O₃ measurements",
+      "Lidar O₃ profile measurements",
       "High-precision validation",
       "Continuous monitoring",
-      "Research-grade accuracy"
+      "Complementary to Pandora data"
     ],
     color: "text-accent"
   }
